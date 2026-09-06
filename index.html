@@ -106,7 +106,10 @@
             color: white;
             font-size: 24px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+        top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
         .wheel-marker {
             position: absolute;
@@ -296,18 +299,17 @@
                 <div class="w-full lg:w-1/2 flex flex-col items-center">
                     <div class="wheel-marker"></div>
                     <div class="wheel-container">
-                        <div id="schedule-wheel" class="wheel">
-                            <!-- Spokes for visual effect -->
-                            <div class="spoke"></div>
-                            <div class="spoke"></div>
-                            <div class="spoke"></div>
-                            <div class="spoke"></div>
-                            
-                            <div class="wheel-center">
-                                <i class="fa-solid fa-church"></i>
-                            </div>
-                        </div>
-                    </div>
+    <div id="schedule-wheel" class="wheel">
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+        <div class="spoke"></div>
+    </div>
+    
+    <div class="wheel-center">
+        <i class="fa-solid fa-church"></i>
+    </div>
+</div>
                     <button onclick="rotateSchedule()" class="mt-12 bg-servant-accent hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-all shadow-md flex items-center gap-2">
                         <i class="fa-solid fa-rotate-right"></i> Putar Ke Minggu Depan
                     </button>
