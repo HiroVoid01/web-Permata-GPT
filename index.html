@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permata GPT - Youth Ministry</title>
+    <title>Permata GPT — Youth Ministry</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Premium Fonts: Plus Jakarta Sans for a modern, non-coder aesthetic -->
+    <!-- Editorial Typography: Instrument Serif + DM Sans + Space Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,40 +21,38 @@
             theme: {
                 extend: {
                     colors: {
+                        paper: {
+                            DEFAULT: '#F6F3EC',
+                            warm: '#EFECE3',
+                            card: '#FAF8F4',
+                            dark: '#181615'
+                        },
+                        ink: {
+                            DEFAULT: '#181615',
+                            muted: '#5C5752',
+                            light: '#8C857B'
+                        },
                         servant: {
-                            light: '#FCFAFF', // Very soft, warm off-white
-                            soft: '#9F7AEA',  // Soft beautiful lavender
-                            primary: '#4A2574', // Deep regal purple (Elegant)
-                            dark: '#2C1448',    // Very dark purple
-                            accent: '#D4AF37'   // Champagne Gold
+                            light: '#F6F3EC',
+                            soft: '#7A5994',
+                            primary: '#361D4C', // Deep Heritage Plum
+                            dark: '#211030',
+                            accent: '#C47D3E'   // Warm Ochre / Bronze
                         }
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        serif: ['"Instrument Serif"', 'serif'],
+                        mono: ['"Space Mono"', 'monospace'],
                     },
                     animation: {
-                        'marquee': 'marquee 95s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-slow': 'float 8s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                        'marquee': 'marquee 110s linear infinite',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0%)' },
                             '100%': { transform: 'translateX(-50%)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: 0, transform: 'translateY(20px)' },
-                            '100%': { opacity: 1, transform: 'translateY(0)' }
                         }
-                    },
-                    boxShadow: {
-                        'soft': '0 20px 40px -15px rgba(74, 37, 116, 0.08)',
-                        'glow': '0 0 40px -10px rgba(159, 122, 234, 0.4)',
                     }
                 }
             }
@@ -62,115 +60,155 @@
     </script>
     <style>
         body {
-            background-color: #FCFAFF;
-            color: #2D3748;
+            background-color: #F6F3EC;
+            color: #181615;
             overflow-x: hidden;
-            /* Subtle noise texture for premium feel */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
         }
 
         ::selection {
-            background-color: #E9D8FD;
-            color: #4A2574;
+            background-color: #361D4C;
+            color: #F6F3EC;
         }
 
-        /* Glassmorphism Navbar - Modern & Clean */
-        .nav-glass {
-            background: rgba(252, 250, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(74, 37, 116, 0.05);
+        /* Editorial Hairline Borders */
+        .hairline-t { border-top: 1px solid rgba(24, 22, 21, 0.12); }
+        .hairline-b { border-bottom: 1px solid rgba(24, 22, 21, 0.12); }
+        .hairline-l { border-left: 1px solid rgba(24, 22, 21, 0.12); }
+        .hairline-r { border-right: 1px solid rgba(24, 22, 21, 0.12); }
+        .hairline-box { border: 1px solid rgba(24, 22, 21, 0.12); }
+
+        /* Warm Editorial Header */
+        .nav-editorial {
+            background: rgba(246, 243, 236, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(24, 22, 21, 0.12);
         }
 
-        /* SPA Logic */
+        /* SPA Page Switching */
         .page-section {
             display: none;
-            opacity: 0;
         }
         
         .page-section.active {
             display: block;
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 1;
+            animation: editorialFade 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* Re-styled Wheel for a Premium UI Look */
+        @keyframes editorialFade {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Analog Architectural Dial (Replaces Cartoon Wheel) */
         .wheel-container {
             position: relative;
-            width: 320px;
-            height: 320px;
+            width: 310px;
+            height: 310px;
             margin: 0 auto;
-            filter: drop-shadow(0 20px 40px rgba(74, 37, 116, 0.15));
         }
 
         .wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            /* Gradient border effect */
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, #9F7AEA, #4A2574) border-box;
-            border: 8px solid transparent;
+            background-color: #FAF8F4;
+            border: 1px solid rgba(24, 22, 21, 0.2);
             position: absolute;
-            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 12px 32px -12px rgba(24, 22, 21, 0.12);
+        }
+
+        .wheel::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border-radius: 50%;
+            border: 1px dashed rgba(24, 22, 21, 0.2);
+            pointer-events: none;
+        }
+
+        .wheel::after {
+            content: '';
+            position: absolute;
+            inset: 52px;
+            border-radius: 50%;
+            border: 1px solid rgba(24, 22, 21, 0.1);
+            pointer-events: none;
         }
 
         .wheel-center {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #4A2574, #2C1448);
+            width: 72px;
+            height: 72px;
+            background: #361D4C;
             border-radius: 50%;
             position: absolute;
             z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 26px;
-            box-shadow: 0 10px 25px rgba(44, 20, 72, 0.4);
+            color: #F6F3EC;
+            font-size: 18px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 3px solid white;
+            border: 4px solid #F6F3EC;
+            box-shadow: 0 4px 15px rgba(24, 22, 21, 0.15);
         }
 
+        /* Sleek Needle Pointer */
         .wheel-marker {
             position: absolute;
-            top: -25px;
+            top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            width: 0; 
-            height: 0; 
-            border-left: 22px solid transparent;
-            border-right: 22px solid transparent;
-            border-top: 34px solid #D4AF37; /* Gold Marker */
             z-index: 20;
-            filter: drop-shadow(0px 8px 6px rgba(212, 175, 55, 0.3));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wheel-marker-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #C47D3E;
+        }
+
+        .wheel-marker-line {
+            width: 2px;
+            height: 22px;
+            background: #C47D3E;
         }
 
         .spoke {
             position: absolute;
-            width: 2px;
+            width: 1px;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(74,37,116,0.1) 20%, rgba(74,37,116,0.1) 80%, transparent);
-            left: calc(50% - 1px);
+            background: rgba(24, 22, 21, 0.12);
+            left: 50%;
         }
         
         .spoke:nth-child(2) { transform: rotate(45deg); }
         .spoke:nth-child(3) { transform: rotate(90deg); }
         .spoke:nth-child(4) { transform: rotate(135deg); }
 
-        /* Modern Gallery Marquee */
+        /* Editorial Film Reel Marquee */
         .marquee-container {
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
             position: relative;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
         .marquee-content {
             display: inline-flex;
@@ -180,81 +218,84 @@
             animation-play-state: paused;
         }
         .marquee-item {
-            width: 300px;
-            height: 200px;
-            margin: 0 12px;
-            border-radius: 24px;
+            width: 320px;
+            height: 220px;
+            margin: 0 10px;
+            border-radius: 4px;
             object-fit: cover;
             flex-shrink: 0;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            filter: grayscale(15%) contrast(102%);
+            transition: all 0.4s ease;
         }
         .marquee-item:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(74, 37, 116, 0.25);
+            filter: grayscale(0%) contrast(100%);
+            transform: translateY(-4px);
         }
 
-        /* Clean Scrollbar */
+        /* Subtle Image Hover */
+        .editorial-img {
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+        }
+        .group:hover .editorial-img {
+            transform: scale(1.03);
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #CBD5E0; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #9F7AEA; }
-
-        /* Beautiful gradient text */
-        .text-gradient {
-            background: linear-gradient(135deg, #4A2574, #9F7AEA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #D4AF37, #F3E5AB);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        ::-webkit-scrollbar-track { background: #F6F3EC; }
+        ::-webkit-scrollbar-thumb { background: #C5BFB3; }
+        ::-webkit-scrollbar-thumb:hover { background: #361D4C; }
     </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen selection:bg-purple-200">
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Top Editorial Micro-Bar -->
+    <div class="bg-paper-dark text-paper/80 text-[11px] font-mono tracking-widest uppercase py-2 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span>PERSEKUTUAN PEMUDA GEREJA • PERMATA GPT</span>
+            <span class="hidden sm:inline">JAYAPURA, PAPUA — INDONESIA</span>
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="nav-glass fixed w-full z-50 top-0 transition-all duration-300 py-2">
+    <nav class="nav-editorial sticky w-full z-40 top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
+            <div class="flex justify-between items-center h-20">
+                <!-- Editorial Masthead Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="navigate('home')">
-                    <div class="w-10 h-10 bg-gradient-to-br from-servant-primary to-servant-soft rounded-2xl flex items-center justify-center mr-3 shadow-glow group-hover:scale-105 transition-transform duration-300">
-                        <i class="fa-solid fa-dove text-white text-lg"></i>
+                    <div class="flex flex-col">
+                        <span class="font-serif text-3xl sm:text-4xl tracking-tight text-ink leading-none">
+                            Permata <i class="font-serif italic font-normal text-servant-primary">GPT.</i>
+                        </span>
                     </div>
-                    <span class="font-extrabold text-2xl tracking-tight text-gray-900">Permata<span class="text-gradient ml-1">GPT</span></span>
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-1 items-center bg-white/50 px-2 py-1.5 rounded-full shadow-sm border border-gray-100">
-                    <button onclick="navigate('home')" class="nav-link px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-servant-primary hover:bg-white transition-all">Beranda</button>
-                    <button onclick="navigate('jadwal')" class="nav-link px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-servant-primary hover:bg-white transition-all">Jadwal</button>
-                    <button onclick="navigate('galeri')" class="nav-link px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-servant-primary hover:bg-white transition-all">Galeri</button>
-                    <button onclick="navigate('event')" class="nav-link px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-servant-primary hover:bg-white transition-all">Event</button>
-                    <button onclick="navigate('about')" class="nav-link px-4 py-2 rounded-full text-sm font-semibold text-gray-600 hover:text-servant-primary hover:bg-white transition-all">Tentang</button>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="navigate('home')" class="nav-link py-1 text-sm font-medium text-ink-muted hover:text-ink transition-all border-b-2 border-transparent">Beranda</button>
+                    <button onclick="navigate('jadwal')" class="nav-link py-1 text-sm font-medium text-ink-muted hover:text-ink transition-all border-b-2 border-transparent">Jadwal Ibadah</button>
+                    <button onclick="navigate('galeri')" class="nav-link py-1 text-sm font-medium text-ink-muted hover:text-ink transition-all border-b-2 border-transparent">Galeri Arsip</button>
+                    <button onclick="navigate('event')" class="nav-link py-1 text-sm font-medium text-ink-muted hover:text-ink transition-all border-b-2 border-transparent">Agenda</button>
+                    <button onclick="navigate('about')" class="nav-link py-1 text-sm font-medium text-ink-muted hover:text-ink transition-all border-b-2 border-transparent">Tentang Kami</button>
                 </div>
 
-                <div class="hidden md:flex items-center gap-3">
-                    <!-- Indikator Mode Admin -->
-                    <button id="admin-nav-badge" onclick="openAdminModal()" class="hidden bg-servant-accent/10 text-servant-accent hover:bg-servant-accent/20 px-4 py-2 rounded-full text-xs font-bold transition-colors flex items-center gap-2">
-                        <i class="fa-solid fa-shield-halved"></i> Admin
+                <!-- Right Action -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button id="admin-nav-badge" onclick="openAdminModal()" class="hidden bg-servant-accent/15 text-servant-accent hover:bg-servant-accent/25 px-3.5 py-1.5 rounded text-xs font-mono uppercase tracking-wider transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> Panel Pengurus
                     </button>
-                    <button onclick="navigate('contact')" class="bg-gray-900 hover:bg-servant-primary text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-glow transform hover:-translate-y-0.5">
+                    <button onclick="navigate('contact')" class="bg-servant-primary hover:bg-servant-dark text-paper px-5 py-2.5 text-xs font-mono uppercase tracking-widest transition-all">
                         Hubungi Kami
                     </button>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center gap-3">
-                    <button id="admin-nav-badge-mobile" onclick="openAdminModal()" class="hidden bg-servant-accent/10 text-servant-accent px-3 py-1.5 rounded-full text-xs font-bold">
-                        <i class="fa-solid fa-shield"></i>
+                    <button id="admin-nav-badge-mobile" onclick="openAdminModal()" class="hidden bg-servant-accent/15 text-servant-accent px-3 py-1.5 rounded text-xs font-mono">
+                        Admin
                     </button>
-                    <button id="mobile-menu-btn" class="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center text-gray-700 hover:text-servant-primary focus:outline-none">
+                    <button id="mobile-menu-btn" class="w-10 h-10 hairline-box flex items-center justify-center text-ink focus:outline-none">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </button>
                 </div>
@@ -262,184 +303,223 @@
         </div>
         
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-2xl rounded-b-3xl">
-            <div class="px-6 py-6 space-y-3 flex flex-col">
-                <button onclick="navigate('home'); closeMobileMenu()" class="block w-full px-4 py-3 text-base font-bold text-gray-800 hover:bg-purple-50 rounded-2xl text-left transition-colors">Beranda</button>
-                <button onclick="navigate('jadwal'); closeMobileMenu()" class="block w-full px-4 py-3 text-base font-bold text-gray-800 hover:bg-purple-50 rounded-2xl text-left transition-colors">Jadwal Ibadah</button>
-                <button onclick="navigate('galeri'); closeMobileMenu()" class="block w-full px-4 py-3 text-base font-bold text-gray-800 hover:bg-purple-50 rounded-2xl text-left transition-colors">Galeri</button>
-                <button onclick="navigate('event'); closeMobileMenu()" class="block w-full px-4 py-3 text-base font-bold text-gray-800 hover:bg-purple-50 rounded-2xl text-left transition-colors">Event</button>
-                <button onclick="navigate('about'); closeMobileMenu()" class="block w-full px-4 py-3 text-base font-bold text-gray-800 hover:bg-purple-50 rounded-2xl text-left transition-colors">Tentang Kami</button>
-                <div class="pt-4 border-t border-gray-100">
-                    <button onclick="navigate('contact'); closeMobileMenu()" class="block w-full bg-gray-900 text-white px-4 py-3 text-base font-bold rounded-2xl text-center shadow-md">Hubungi Kami</button>
+        <div id="mobile-menu" class="hidden md:hidden bg-paper hairline-t hairline-b absolute w-full shadow-xl">
+            <div class="px-6 py-6 space-y-2 flex flex-col">
+                <button onclick="navigate('home'); closeMobileMenu()" class="block w-full py-3 text-lg font-serif text-ink hairline-b text-left">01 — Beranda</button>
+                <button onclick="navigate('jadwal'); closeMobileMenu()" class="block w-full py-3 text-lg font-serif text-ink hairline-b text-left">02 — Jadwal Ibadah</button>
+                <button onclick="navigate('galeri'); closeMobileMenu()" class="block w-full py-3 text-lg font-serif text-ink hairline-b text-left">03 — Galeri Arsip</button>
+                <button onclick="navigate('event'); closeMobileMenu()" class="block w-full py-3 text-lg font-serif text-ink hairline-b text-left">04 — Agenda & Event</button>
+                <button onclick="navigate('about'); closeMobileMenu()" class="block w-full py-3 text-lg font-serif text-ink hairline-b text-left">05 — Tentang Kami</button>
+                <div class="pt-4">
+                    <button onclick="navigate('contact'); closeMobileMenu()" class="block w-full bg-servant-primary text-paper py-3.5 text-xs font-mono uppercase tracking-widest text-center">Hubungi Kami</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content Area -->
-    <main class="flex-grow pt-28 pb-12 relative">
+    <main class="flex-grow pb-16 relative">
         
         <!-- ================= PAGE: HOME ================= -->
         <section id="home" class="page-section active max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-16 py-12 lg:py-20 relative">
-                <!-- Decorative background blobs -->
-                <div class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-purple-200/50 rounded-full blur-[100px] mix-blend-multiply opacity-70 animate-float-slow"></div>
-                <div class="absolute bottom-0 left-10 -z-10 w-[400px] h-[400px] bg-amber-100/50 rounded-full blur-[80px] mix-blend-multiply opacity-60 animate-float"></div>
+            
+            <!-- Editorial Hero Spread -->
+            <div class="py-12 lg:py-20 hairline-b">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+                    
+                    <!-- Left Column: Typography -->
+                    <div class="lg:col-span-7">
+                        <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink-muted mb-6">
+                            <span class="text-servant-accent font-bold">NO. 01</span>
+                            <span>/</span>
+                            <span>KOMUNITAS PEMUDA KRISTEN</span>
+                        </div>
+                        
+                        <h1 class="font-serif text-6xl sm:text-7xl md:text-8xl text-ink leading-[0.95] tracking-tight mb-8">
+                            Bertumbuh bersama, <br/>
+                            melayani dengan <span class="italic text-servant-primary font-normal">hati hamba.</span>
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-ink-muted max-w-xl leading-relaxed mb-10 font-normal">
+                            Selamat datang di rumah besar Permata GPT. Kami adalah persekutuan anak muda yang belajar mengenal Kristus lebih dalam, merayakan persahabatan yang tulus, dan hadir menjadi berkat bagi sesama.
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center gap-5">
+                            <button onclick="navigate('jadwal')" class="bg-ink hover:bg-servant-primary text-paper px-8 py-4 text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-3">
+                                Lihat Jadwal Minggu Ini <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="navigate('about')" class="px-6 py-4 text-xs font-mono uppercase tracking-widest text-ink hover:text-servant-primary hairline-box bg-paper-card transition-colors">
+                                Visi & Cerita Kami
+                            </button>
+                        </div>
 
-                <div class="flex-1 text-center lg:text-left z-10">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full font-bold text-xs tracking-wide text-servant-primary shadow-sm border border-purple-100 mb-8 uppercase">
-                        <span class="w-2 h-2 rounded-full bg-servant-accent animate-pulse"></span> Youth Ministry
-                    </div>
-                    <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
-                        Melayani dengan <br/>
-                        <span class="text-gradient">Hati Hamba.</span>
-                    </h1>
-                    <p class="text-lg text-gray-500 mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
-                        Selamat datang di Permata GPT. Kami adalah generasi muda yang bersemangat, dinamis, dan terpanggil untuk berdampak bagi sesama dengan kasih.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <button onclick="navigate('jadwal')" class="bg-servant-primary hover:bg-servant-dark text-white px-8 py-4 rounded-full font-bold transition-all shadow-glow flex items-center justify-center gap-3">
-                            Jadwal Ibadah <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                        <button onclick="navigate('about')" class="bg-white text-gray-700 hover:text-servant-primary border-none shadow-soft px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center">
-                            Kenali Kami
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="flex-1 relative w-full max-w-lg mx-auto lg:max-w-none">
-                    <!-- Image Wrapper with soft styling -->
-                    <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-[6px] border-white z-10 transform lg:-rotate-2 hover:rotate-0 transition-transform duration-700">
-                        <img src="images/Foto 1.jpg" onerror="handleImageFallback(this, 1)" alt="Pemuda Gereja" class="w-full h-[400px] lg:h-[500px] object-cover">
-                        <!-- Soft overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-servant-primary/40 to-transparent mix-blend-overlay"></div>
-                    </div>
-                    <!-- Decorative floating element -->
-                    <div class="absolute -bottom-8 -left-8 bg-white p-5 rounded-3xl shadow-soft z-20 animate-float hidden md:flex items-center gap-4">
-                        <div class="w-12 h-12 bg-servant-accent/10 rounded-2xl flex items-center justify-center text-servant-accent text-xl">
-                            <i class="fa-solid fa-fire-flame-curved"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-400 uppercase">Sejak</p>
-                            <p class="font-extrabold text-gray-900 text-lg leading-none">Generasi Baru</p>
+                        <!-- Editorial Footnote Stats -->
+                        <div class="grid grid-cols-3 gap-6 mt-14 pt-8 hairline-t max-w-lg">
+                            <div>
+                                <p class="font-mono text-[11px] uppercase text-ink-light">Ibadah Rutin</p>
+                                <p class="font-serif text-2xl sm:text-3xl text-ink mt-1">Setiap Minggu</p>
+                            </div>
+                            <div>
+                                <p class="font-mono text-[11px] uppercase text-ink-light">Waktu Kumpul</p>
+                                <p class="font-serif text-2xl sm:text-3xl text-ink mt-1">17.00 WIT</p>
+                            </div>
+                            <div>
+                                <p class="font-mono text-[11px] uppercase text-ink-light">Sektor</p>
+                                <p class="font-serif text-2xl sm:text-3xl text-ink mt-1">Bergilir</p>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Right Column: Framed Editorial Photography -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-paper-card p-3 sm:p-4 hairline-box">
+                            <div class="relative overflow-hidden aspect-[4/5] bg-paper-warm">
+                                <img src="images/Foto 1.jpg" onerror="handleImageFallback(this, 1)" alt="Pemuda Permata GPT" class="w-full h-full object-cover editorial-img">
+                            </div>
+                            <div class="pt-3 flex justify-between items-center font-mono text-[11px] text-ink-muted">
+                                <span>ARSIP DOKUMENTASI — PERMATA GPT</span>
+                                <span>JAYAPURA</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Pengurus Inti Section - Premium Glass Cards -->
-            <div class="py-24 relative">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Pengurus Inti</h2>
-                    <p class="text-gray-500 mt-4 font-medium">Koordinator pergerakan Permata GPT.</p>
+            <!-- Quote / Verse Interlude -->
+            <div class="py-16 lg:py-24 hairline-b text-center max-w-4xl mx-auto px-4">
+                <p class="font-mono text-xs uppercase tracking-widest text-servant-accent mb-4">1 TIMOTIUS 4:12</p>
+                <blockquote class="font-serif italic text-3xl sm:text-5xl text-ink leading-snug">
+                    “Jangan seorang pun menganggap engkau rendah karena engkau muda. Jadilah teladan bagi orang-orang percaya, dalam perkataanmu, dalam tingkah lakumu, dalam kasihmu, dalam kesetiaanmu dan dalam kesucianmu.”
+                </blockquote>
+            </div>
+
+            <!-- Pengurus Inti Section - Editorial Portrait Roster -->
+            <div class="py-16 lg:py-24">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+                    <div>
+                        <p class="font-mono text-xs uppercase tracking-widest text-ink-muted mb-2">02 / PELAYAN KOORDINATOR</p>
+                        <h2 class="font-serif text-4xl sm:text-6xl text-ink tracking-tight">Pengurus Inti Permata</h2>
+                    </div>
+                    <p class="text-sm text-ink-muted max-w-sm leading-relaxed">
+                        Rekan-rekan muda yang dipercayakan untuk mengkoordinir pelayanan, jadwal ibadah, dan pergerakan kasih Permata GPT.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 lg:px-0 relative z-10">
-                    <!-- Card 1 -->
-                    <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 text-center shadow-soft border border-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-32 h-32 mx-auto rounded-full p-1.5 bg-gradient-to-br from-servant-primary to-servant-soft mb-6 shadow-md">
-                            <img src="images/Foto Ketua.jpg" onerror="this.src='https://placehold.co/400x400/9F7AEA/ffffff?text=MK'" alt="Ketua" class="w-full h-full object-cover rounded-full border-[3px] border-white">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Leader 1 -->
+                    <div class="group bg-paper-card p-4 hairline-box">
+                        <div class="flex justify-between items-center font-mono text-xs text-ink-light mb-3">
+                            <span>01</span>
+                            <span>KETUA PEMUDA</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Michael Kevin</h3>
-                        <p class="text-servant-primary font-bold text-sm uppercase tracking-wider mb-4">Ketua Pemuda</p>
+                        <div class="aspect-[4/5] overflow-hidden bg-paper-warm mb-5">
+                            <img src="images/Foto Ketua.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" alt="Ketua Pemuda" class="w-full h-full object-cover editorial-img">
+                        </div>
+                        <h3 class="font-serif text-3xl text-ink">Michael Kevin</h3>
+                        <p class="text-xs font-mono uppercase tracking-wider text-servant-primary mt-1">Koordinator Utama</p>
                     </div>
                     
-                    <!-- Card 2 (Elevated) -->
-                    <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 text-center shadow-soft border border-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 transform md:-translate-y-8">
-                        <div class="w-32 h-32 mx-auto rounded-full p-1.5 bg-gradient-to-br from-servant-accent to-amber-200 mb-6 shadow-md">
-                            <img src="images/Foto Sekretaris.jpg" onerror="this.src='https://placehold.co/400x400/D4AF37/ffffff?text=SA'" alt="Sekretaris" class="w-full h-full object-cover rounded-full border-[3px] border-white">
+                    <!-- Leader 2 -->
+                    <div class="group bg-paper-card p-4 hairline-box">
+                        <div class="flex justify-between items-center font-mono text-xs text-ink-light mb-3">
+                            <span>02</span>
+                            <span>SEKRETARIS</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Sarah Angelina</h3>
-                        <p class="text-servant-accent font-bold text-sm uppercase tracking-wider mb-4">Sekretaris</p>
+                        <div class="aspect-[4/5] overflow-hidden bg-paper-warm mb-5">
+                            <img src="images/Foto Sekretaris.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80'" alt="Sekretaris" class="w-full h-full object-cover editorial-img">
+                        </div>
+                        <h3 class="font-serif text-3xl text-ink">Sarah Angelina</h3>
+                        <p class="text-xs font-mono uppercase tracking-wider text-servant-accent mt-1">Administrasi & Warta</p>
                     </div>
                     
-                    <!-- Card 3 -->
-                    <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 text-center shadow-soft border border-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-32 h-32 mx-auto rounded-full p-1.5 bg-gradient-to-br from-servant-primary to-servant-soft mb-6 shadow-md">
-                            <img src="images/Foto Bendahara.jpg" onerror="this.src='https://placehold.co/400x400/9F7AEA/ffffff?text=DP'" alt="Bendahara" class="w-full h-full object-cover rounded-full border-[3px] border-white">
+                    <!-- Leader 3 -->
+                    <div class="group bg-paper-card p-4 hairline-box">
+                        <div class="flex justify-between items-center font-mono text-xs text-ink-light mb-3">
+                            <span>03</span>
+                            <span>BENDAHARA</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Daniel Pratama</h3>
-                        <p class="text-servant-primary font-bold text-sm uppercase tracking-wider mb-4">Bendahara</p>
+                        <div class="aspect-[4/5] overflow-hidden bg-paper-warm mb-5">
+                            <img src="images/Foto Bendahara.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'" alt="Bendahara" class="w-full h-full object-cover editorial-img">
+                        </div>
+                        <h3 class="font-serif text-3xl text-ink">Daniel Pratama</h3>
+                        <p class="text-xs font-mono uppercase tracking-wider text-servant-primary mt-1">Kas & Pelayanan Kasih</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ================= PAGE: JADWAL IBADAH ================= -->
-        <section id="jadwal" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="text-center mb-20">
-                <span class="text-servant-primary font-extrabold text-sm uppercase tracking-widest mb-3 block">Informasi</span>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Jadwal & Lokasi</h2>
-                <button onclick="openAdminModal('jadwal')" class="admin-only-btn hidden mt-6 bg-white border border-gray-200 text-servant-primary px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm hover:shadow-md inline-flex items-center gap-2 mx-auto">
-                    <i class="fa-solid fa-pen-to-square"></i> Kelola Jadwal
-                </button>
+        <section id="jadwal" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="flex flex-col md:flex-row md:items-end justify-between pb-10 hairline-b mb-14 gap-6">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-accent block mb-2">WARTA SEKTOR BERGILIR</span>
+                    <h2 class="font-serif text-5xl sm:text-6xl text-ink tracking-tight">Jadwal & Lokasi Ibadah</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <p class="text-sm text-ink-muted max-w-sm">
+                        Putar kompas jadwal untuk memeriksa lokasi ibadah pemuda dari minggu ke minggu.
+                    </p>
+                    <button onclick="openAdminModal('jadwal')" class="admin-only-btn hidden bg-ink text-paper px-4 py-2.5 text-xs font-mono uppercase tracking-wider inline-flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Jadwal
+                    </button>
+                </div>
             </div>
 
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-16 xl:gap-24 relative">
-                <!-- Premium Wheel Graphic -->
-                <div class="w-full lg:w-1/2 flex flex-col items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left: Analog Architectural Dial -->
+                <div class="lg:col-span-5 flex flex-col items-center py-6">
                     <div class="wheel-container">
-                        <div class="wheel-marker"></div>
-                        <div id="schedule-wheel" class="wheel bg-white">
+                        <div class="wheel-marker">
+                            <div class="wheel-marker-dot"></div>
+                            <div class="wheel-marker-line"></div>
+                        </div>
+                        <div id="schedule-wheel" class="wheel">
                             <div class="spoke"></div>
                             <div class="spoke"></div>
                             <div class="spoke"></div>
                             <div class="spoke"></div>
+                            <span class="absolute top-5 font-mono text-[10px] tracking-widest text-ink-light uppercase">Minggu I</span>
+                            <span class="absolute right-4 font-mono text-[10px] tracking-widest text-ink-light uppercase rotate-90">Minggu II</span>
+                            <span class="absolute bottom-5 font-mono text-[10px] tracking-widest text-ink-light uppercase">Minggu III</span>
+                            <span class="absolute left-4 font-mono text-[10px] tracking-widest text-ink-light uppercase -rotate-90">Minggu IV</span>
                         </div>
                         <div class="wheel-center">
-                            <i class="fa-solid fa-church"></i>
+                            <i class="fa-solid fa-compass"></i>
                         </div>
                     </div>
-                    <button onclick="rotateSchedule()" class="mt-16 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 px-8 py-4 rounded-full font-bold transition-all shadow-soft hover:shadow-lg flex items-center gap-3">
-                        <i class="fa-solid fa-arrows-rotate text-servant-accent"></i> Putar Jadwal
+                    
+                    <button onclick="rotateSchedule()" class="mt-10 bg-ink hover:bg-servant-primary text-paper px-7 py-3.5 text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-3">
+                        <i class="fa-solid fa-rotate-right text-servant-accent"></i> Putar Ke Minggu Berikutnya
                     </button>
                 </div>
 
-                <!-- Sleek Schedule Card -->
-                <div class="w-full lg:w-1/2 max-w-lg mx-auto">
-                    <div id="schedule-card" class="bg-white rounded-[2.5rem] p-10 shadow-soft border border-white transition-all duration-500 relative overflow-hidden group">
-                        <!-- Elegant abstract shape in corner -->
-                        <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-purple-50 rounded-full blur-2xl group-hover:bg-purple-100 transition-colors duration-500"></div>
+                <!-- Right: Editorial Bulletin Card -->
+                <div class="lg:col-span-7">
+                    <div id="schedule-card" class="bg-paper-card p-8 sm:p-12 hairline-box transition-all duration-300">
+                        <div class="flex flex-wrap justify-between items-center gap-4 pb-6 hairline-b mb-8">
+                            <span id="sch-label" class="px-3 py-1 bg-servant-primary text-paper font-mono text-xs uppercase tracking-widest">Minggu Ini</span>
+                            <span class="font-mono text-xs text-ink-light uppercase tracking-widest">WARTA IBADah PEMUDA</span>
+                        </div>
                         
-                        <div class="relative z-10">
-                            <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-6">
-                                <span id="sch-label" class="px-4 py-1.5 bg-servant-primary/10 text-servant-primary text-xs font-extrabold rounded-full uppercase tracking-wider">Minggu Ini</span>
-                                <span class="text-gray-400"><i class="fa-solid fa-calendar-check text-2xl"></i></span>
+                        <p class="font-mono text-xs uppercase tracking-widest text-ink-light mb-2">HARI & TANGGAL</p>
+                        <h3 id="sch-date" class="font-serif text-4xl sm:text-5xl text-ink mb-10">-</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 hairline-t">
+                            <div class="sm:col-span-2">
+                                <p class="font-mono text-[11px] uppercase tracking-widest text-servant-accent mb-1">01 / TEMPAT & ALAMAT IBADAH</p>
+                                <p id="sch-location" class="font-serif text-2xl sm:text-3xl text-ink">-</p>
+                                <p id="sch-address" class="text-sm text-ink-muted mt-1">-</p>
                             </div>
                             
-                            <h3 id="sch-date" class="text-3xl font-extrabold text-gray-900 mb-10 tracking-tight">-</h3>
-                            
-                            <div class="space-y-8">
-                                <div class="flex items-start gap-5">
-                                    <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-servant-primary flex-shrink-0">
-                                        <i class="fa-solid fa-location-dot text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Lokasi</p>
-                                        <p id="sch-location" class="text-lg font-bold text-gray-900">-</p>
-                                        <p id="sch-address" class="text-sm text-gray-500 mt-1 leading-relaxed">-</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-5">
-                                    <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-servant-accent flex-shrink-0">
-                                        <i class="fa-solid fa-microphone-lines text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Pelayan Firman</p>
-                                        <p id="sch-speaker" class="text-lg font-bold text-gray-900">-</p>
-                                    </div>
-                                </div>
+                            <div class="pt-6 hairline-t">
+                                <p class="font-mono text-[11px] uppercase tracking-widest text-ink-light mb-1">02 / PELAYAN FIRMAN</p>
+                                <p id="sch-speaker" class="text-lg font-semibold text-ink">-</p>
+                            </div>
 
-                                <div class="flex items-start gap-5">
-                                    <div class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600 flex-shrink-0">
-                                        <i class="fa-regular fa-clock text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Waktu</p>
-                                        <p id="sch-time" class="text-lg font-bold text-gray-900">17.00 WIT - Selesai</p>
-                                    </div>
-                                </div>
+                            <div class="pt-6 hairline-t">
+                                <p class="font-mono text-[11px] uppercase tracking-widest text-ink-light mb-1">03 / WAKTU IBADAH</p>
+                                <p id="sch-time" class="text-lg font-semibold text-ink">17.00 WIT - Selesai</p>
                             </div>
                         </div>
                     </div>
@@ -448,157 +528,159 @@
         </section>
 
         <!-- ================= PAGE: GALERI ================= -->
-        <section id="galeri" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Momen Berharga</h2>
-                <p class="text-gray-500 mt-4 font-medium max-w-2xl mx-auto">Potret kebersamaan dan pelayanan yang mengukir kenangan indah di Permata GPT.</p>
+        <section id="galeri" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="flex flex-col md:flex-row md:items-end justify-between pb-10 hairline-b mb-12 gap-4">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-accent block mb-2">DOKUMENTASI PELAYANAN</span>
+                    <h2 class="font-serif text-5xl sm:text-6xl text-ink tracking-tight">Arsip Momen Bersama</h2>
+                </div>
+                <p class="text-sm text-ink-muted max-w-md">
+                    Rekaman jejak pelayanan, fellowship, dan kebersamaan keluarga besar Permata GPT dalam 22 bingkai dokumentasi.
+                </p>
             </div>
 
-            <!-- Modern Marquee -->
-            <div class="mb-24">
-                <div class="marquee-container py-8">
+            <!-- Filmstrip Marquee -->
+            <div class="mb-20">
+                <div class="flex justify-between items-center font-mono text-xs text-ink-light uppercase mb-3">
+                    <span>REEL SOROTAN</span>
+                    <span>ARAHKAN KURSOR UNTUK MENJEDA</span>
+                </div>
+                <div class="marquee-container py-4 hairline-t hairline-b bg-paper-warm/50">
                     <div id="gallery-marquee" class="marquee-content animate-marquee">
                         <!-- Populated by JS -->
                     </div>
                 </div>
             </div>
 
-            <!-- Premium Grid Gallery -->
+            <!-- Editorial Contact Sheet Grid -->
             <div>
                 <div class="flex justify-between items-end mb-8">
-                    <h3 class="text-2xl font-bold text-gray-900 tracking-tight">Koleksi Album</h3>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">22 Foto</span>
+                    <h3 class="font-serif text-3xl text-ink">Indeks Foto (01 — 22)</h3>
+                    <span class="font-mono text-xs text-ink-muted uppercase">KLIK FOTO UNTUK PERBESAR</span>
                 </div>
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Populated by JS -->
                 </div>
             </div>
         </section>
 
         <!-- ================= PAGE: EVENT ================= -->
-        <section id="event" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+        <section id="event" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="flex flex-col md:flex-row justify-between md:items-end pb-10 hairline-b mb-12 gap-6">
                 <div>
-                    <span class="text-servant-primary font-extrabold text-sm uppercase tracking-widest mb-3 block">Kegiatan</span>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Event Mendatang</h2>
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-accent block mb-2">KALENDER KEGIATAN</span>
+                    <h2 class="font-serif text-5xl sm:text-6xl text-ink tracking-tight">Agenda & Event Mendatang</h2>
                 </div>
-                <button onclick="openAdminModal('event')" class="admin-only-btn hidden bg-white border border-gray-200 text-servant-primary px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:shadow-md inline-flex items-center gap-2">
+                <button onclick="openAdminModal('event')" class="admin-only-btn hidden bg-ink text-paper px-5 py-2.5 text-xs font-mono uppercase tracking-wider inline-flex items-center gap-2 self-start">
                     <i class="fa-solid fa-plus"></i> Kelola Event
                 </button>
             </div>
 
-            <!-- Clean UI Event Grid -->
-            <div id="event-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Editorial Event List -->
+            <div id="event-grid-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Populated by JS -->
             </div>
         </section>
 
         <!-- ================= PAGE: ABOUT US ================= -->
-        <section id="about" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="bg-white rounded-[3rem] shadow-soft overflow-hidden border border-white">
-                <!-- Hero Image Area -->
-                <div class="h-80 w-full relative">
-                    <img src="images/Foto 4.jpg" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953eb1b5ce?auto=format&fit=crop&q=80&w=2000'" alt="About Us" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
-                    <div class="absolute bottom-10 left-10 md:left-16 z-10">
-                        <span class="text-servant-accent font-extrabold text-sm uppercase tracking-widest mb-2 block">Tentang Kami</span>
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Lebih dari Sekadar <br>Perkumpulan.</h2>
+        <section id="about" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 hairline-b items-center">
+                <div class="lg:col-span-6">
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-accent block mb-3">TENTANG PERMATA GPT</span>
+                    <h2 class="font-serif text-5xl sm:text-6xl text-ink leading-none mb-6">
+                        Lebih dari sekadar perkumpulan, kami adalah <span class="italic text-servant-primary">keluarga.</span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-ink-muted leading-relaxed">
+                        Permata GPT hadir sebagai wadah bagi generasi muda gereja untuk berakar di dalam firman Tuhan, bertumbuh dalam karakter Kristus, dan berbuah melalui pelayanan nyata bagi gereja serta sesama di tanah Papua.
+                    </p>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="bg-paper-card p-3 hairline-box">
+                        <img src="images/Foto 4.jpg" onerror="handleImageFallback(this, 4)" alt="Tentang Permata GPT" class="w-full h-80 sm:h-96 object-cover">
                     </div>
                 </div>
-                
-                <div class="p-10 md:p-16">
-                    <p class="text-xl text-gray-600 font-medium leading-relaxed mb-16 max-w-3xl">
-                        Permata GPT adalah rumah bagi generasi muda untuk bertumbuh bersama dalam iman, menjalin persahabatan yang autentik, dan menemukan tujuan hidup di dalam Kristus.
-                    </p>
+            </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div class="bg-gray-50 rounded-[2rem] p-10">
-                            <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-servant-primary text-2xl mb-6">
-                                <i class="fa-solid fa-eye"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Visi Kami</h3>
-                            <p class="text-gray-600 leading-relaxed font-medium">
-                                Menjadi generasi muda yang radikal bagi Kristus, memiliki karakter hamba yang setia melayani, dan membawa dampak positif bagi gereja, keluarga, serta masyarakat.
-                            </p>
-                        </div>
-                        <div class="bg-servant-primary/5 rounded-[2rem] p-10">
-                            <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-servant-accent text-2xl mb-6">
-                                <i class="fa-solid fa-bullseye"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Misi Kami</h3>
-                            <ul class="space-y-4 text-gray-600 font-medium">
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-servant-primary mt-1"></i> 
-                                    <span>Membangun fondasi rohani yang kuat melalui firman dan doa.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-servant-primary mt-1"></i> 
-                                    <span>Mewadahi talenta anak muda untuk pelayanan gereja.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-servant-primary mt-1"></i> 
-                                    <span>Mempererat fellowship yang sehat dan inklusif.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16">
+                <div class="bg-paper-card p-8 sm:p-10 hairline-box">
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-primary block mb-3">01 / VISI KAMI</span>
+                    <h3 class="font-serif text-3xl text-ink mb-4">Generasi Berhati Hamba</h3>
+                    <p class="text-ink-muted leading-relaxed">
+                        Menjadi generasi muda yang radikal bagi Kristus, memiliki karakter hamba yang setia melayani, dan membawa dampak positif bagi gereja, keluarga, serta masyarakat luas.
+                    </p>
+                </div>
+
+                <div class="bg-paper-card p-8 sm:p-10 hairline-box">
+                    <span class="font-mono text-xs uppercase tracking-widest text-servant-accent block mb-3">02 / MISI KAMI</span>
+                    <h3 class="font-serif text-3xl text-ink mb-4">Panggilan Pelayanan</h3>
+                    <ul class="space-y-4 text-ink-muted">
+                        <li class="flex items-start gap-3">
+                            <span class="font-mono text-xs text-servant-primary mt-1">I.</span>
+                            <span>Membangun fondasi rohani yang kuat melalui pengajaran firman dan persekutuan doa.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="font-mono text-xs text-servant-primary mt-1">II.</span>
+                            <span>Mewadahi talenta, minat, dan karunia anak muda untuk kemuliaan nama Tuhan.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="font-mono text-xs text-servant-primary mt-1">III.</span>
+                            <span>Mempererat ikatan persaudaraan (fellowship) yang hangat, peduli, dan merangkul semua.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- ================= PAGE: CONTACT ================= -->
-        <section id="contact" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="bg-white rounded-[3rem] shadow-soft overflow-hidden border border-white flex flex-col lg:flex-row">
+        <section id="contact" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 lg:grid-cols-12 hairline-box bg-paper-card overflow-hidden">
                 
-                <div class="bg-gray-900 text-white p-12 lg:w-5/12 flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-servant-primary rounded-full blur-[100px] opacity-60"></div>
-                    
-                    <div class="relative z-10">
-                        <h3 class="text-4xl font-extrabold mb-4 tracking-tight">Mari Terhubung.</h3>
-                        <p class="text-gray-400 font-medium mb-12 text-lg">Punya pertanyaan atau butuh dukungan doa? Kami selalu siap mendengar Anda.</p>
+                <div class="bg-servant-primary text-paper p-10 sm:p-14 lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs uppercase tracking-widest text-paper/60 block mb-3">KONTAK & DOA</span>
+                        <h3 class="font-serif text-4xl sm:text-5xl mb-6 leading-none">Mari Terhubung Bersama Kami.</h3>
+                        <p class="text-paper/80 text-sm leading-relaxed mb-12">
+                            Baru pertama kali ingin bergabung di ibadah pemuda, ingin menanyakan lokasi sektor minggu ini, atau memiliki pokok doa? Jangan sungkan menghubungi pengurus kami.
+                        </p>
                         
-                        <div class="space-y-8">
-                            <div class="flex items-start gap-5 group">
-                                <div class="w-12 h-12 rounded-2xl bg-white/10 group-hover:bg-servant-primary/80 transition-colors flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-xs text-gray-400 uppercase tracking-widest mb-1">Lokasi Pusat</p>
-                                    <p class="font-medium text-white">Gereja Pusat GPT<br>Jayapura, Papua</p>
-                                </div>
+                        <div class="space-y-6 pt-6 border-t border-paper/15 font-mono text-xs">
+                            <div>
+                                <p class="text-paper/50 uppercase mb-1">GEREJA PUSAT</p>
+                                <p class="text-sm font-sans text-paper">Gereja Pusat GPT, Jayapura — Papua</p>
                             </div>
-                            <div class="flex items-start gap-5 group">
-                                <div class="w-12 h-12 rounded-2xl bg-white/10 group-hover:bg-servant-primary/80 transition-colors flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-xs text-gray-400 uppercase tracking-widest mb-1">WhatsApp</p>
-                                    <p class="font-medium text-white">+62 823-9878-0908</p>
-                                </div>
+                            <div>
+                                <p class="text-paper/50 uppercase mb-1">WHATSAPP PENGURUS</p>
+                                <p class="text-sm font-sans text-paper">+62 823-9878-0908</p>
+                            </div>
+                            <div>
+                                <p class="text-paper/50 uppercase mb-1">INSTAGRAM</p>
+                                <p class="text-sm font-sans text-paper">@permatagpt (Segera Hadir)</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-12 lg:w-7/12">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-8">Kirim Pesan Langsung</h3>
-                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Pesan terkirim! (Simulasi UI)');">
+                <div class="p-10 sm:p-14 lg:col-span-7">
+                    <h3 class="font-serif text-3xl text-ink mb-2">Kirim Pesan atau Pokok Doa</h3>
+                    <p class="text-sm text-ink-muted mb-8">Pesan Anda akan diterima langsung oleh tim sekretariat Permata GPT.</p>
+                    
+                    <form class="space-y-6" onsubmit="event.preventDefault(); showToast('Pesan berhasil dikirim. Tuhan Yesus memberkati!'); this.reset();">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Nama Lengkap</label>
-                                <input type="text" class="w-full bg-gray-50 px-5 py-4 rounded-2xl border-none focus:ring-2 focus:ring-servant-primary/20 transition-all outline-none font-medium" placeholder="Nama Anda...">
+                                <label class="block font-mono text-[11px] uppercase tracking-wider text-ink-muted mb-2">Nama Lengkap</label>
+                                <input type="text" required class="w-full bg-paper px-4 py-3.5 hairline-box focus:border-servant-primary transition-all outline-none text-sm" placeholder="Masukkan nama Anda...">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">No. WhatsApp</label>
-                                <input type="tel" class="w-full bg-gray-50 px-5 py-4 rounded-2xl border-none focus:ring-2 focus:ring-servant-primary/20 transition-all outline-none font-medium" placeholder="0812...">
+                                <label class="block font-mono text-[11px] uppercase tracking-wider text-ink-muted mb-2">Nomor WhatsApp</label>
+                                <input type="tel" required class="w-full bg-paper px-4 py-3.5 hairline-box focus:border-servant-primary transition-all outline-none text-sm" placeholder="0812...">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Pesan / Pokok Doa</label>
-                            <textarea rows="4" class="w-full bg-gray-50 px-5 py-4 rounded-2xl border-none focus:ring-2 focus:ring-servant-primary/20 transition-all outline-none font-medium resize-none" placeholder="Ceritakan di sini..."></textarea>
+                            <label class="block font-mono text-[11px] uppercase tracking-wider text-ink-muted mb-2">Pesan / Pokok Doa</label>
+                            <textarea rows="4" required class="w-full bg-paper px-4 py-3.5 hairline-box focus:border-servant-primary transition-all outline-none text-sm resize-none" placeholder="Tuliskan pesan atau pokok doa yang ingin didukung..."></textarea>
                         </div>
-                        <button type="submit" class="bg-servant-primary hover:bg-servant-dark text-white font-bold py-4 px-10 rounded-full shadow-glow transition-all transform hover:-translate-y-1 w-full md:w-auto">
-                            Kirim Pesan
+                        <button type="submit" class="bg-ink hover:bg-servant-primary text-paper font-mono text-xs uppercase tracking-widest py-4 px-8 transition-colors">
+                            Kirim Pesan Sekarang
                         </button>
                     </form>
                 </div>
@@ -606,209 +688,236 @@
         </section>
     </main>
 
-    <!-- Clean Footer -->
-    <footer class="bg-white py-10 mt-auto border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                    <i class="fa-solid fa-dove text-white text-xs"></i>
-                </div>
-                <span class="font-extrabold text-lg tracking-tight text-gray-900">PermataGPT</span>
+    <!-- Editorial Footer -->
+    <footer class="bg-paper-warm hairline-t py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <span class="font-serif text-2xl text-ink">Permata <i class="italic text-servant-primary">GPT.</i></span>
+                <span class="text-ink-light">|</span>
+                <span class="font-mono text-xs text-ink-muted">Melayani dengan Hati Hamba</span>
             </div>
             
-            <p class="text-gray-400 font-medium text-sm">© 2026 Youth Ministry. Melayani dengan hati.</p>
-            
-            <button onclick="handleAdminTrigger()" title="Akses Admin" class="text-gray-300 hover:text-servant-primary transition-colors">
-                <i class="fa-solid fa-fingerprint text-xl"></i>
-            </button>
+            <div class="flex items-center gap-4">
+                <p class="font-mono text-xs text-ink-muted">© 2026 Permata GPT Youth Ministry.</p>
+                <button onclick="handleAdminTrigger()" title="Akses Pengurus" class="text-ink-light hover:text-servant-primary transition-colors p-1.5 hairline-box bg-paper">
+                    <i class="fa-solid fa-key text-xs"></i>
+                </button>
+            </div>
         </div>
     </footer>
 
     <!-- ================= MODAL LIGHTBOX GALERI (ZOOM FOTO) ================= -->
-    <div id="lightbox-modal" class="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-opacity" onclick="closeLightbox(event)">
-        <button onclick="closeLightbox(event, true)" class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full text-white text-xl flex items-center justify-center transition-colors z-50">
+    <div id="lightbox-modal" class="fixed inset-0 bg-paper-dark/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-opacity" onclick="closeLightbox(event)">
+        <button onclick="closeLightbox(event, true)" class="absolute top-6 right-6 w-11 h-11 bg-white/10 hover:bg-white/20 text-white text-lg flex items-center justify-center transition-colors z-50">
             <i class="fa-solid fa-xmark"></i>
         </button>
         
-        <button onclick="changeLightboxImage(-1, event)" class="absolute left-4 md:left-8 w-14 h-14 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center text-xl transition-all z-50 backdrop-blur-sm">
+        <button onclick="changeLightboxImage(-1, event)" class="absolute left-4 md:left-8 w-12 h-12 bg-white/10 hover:bg-white/25 text-white flex items-center justify-center text-lg transition-all z-50">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 
         <div class="max-w-5xl flex flex-col items-center pointer-events-none">
-            <img id="lightbox-img" src="" alt="Preview Foto" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl pointer-events-auto">
-            <p id="lightbox-caption" class="text-white font-bold mt-6 text-sm tracking-wide bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 pointer-events-auto"></p>
+            <img id="lightbox-img" src="" alt="Preview Foto" class="max-w-full max-h-[80vh] object-contain shadow-2xl pointer-events-auto border border-white/15">
+            <p id="lightbox-caption" class="text-paper font-mono mt-4 text-xs uppercase tracking-widest bg-white/10 px-5 py-2 pointer-events-auto"></p>
         </div>
 
-        <button onclick="changeLightboxImage(1, event)" class="absolute right-4 md:right-8 w-14 h-14 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center text-xl transition-all z-50 backdrop-blur-sm">
+        <button onclick="changeLightboxImage(1, event)" class="absolute right-4 md:right-8 w-12 h-12 bg-white/10 hover:bg-white/25 text-white flex items-center justify-center text-lg transition-all z-50">
             <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>
 
     <!-- ================= MODAL LOGIN ADMIN ================= -->
-    <div id="admin-login-modal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-[2.5rem] max-w-sm w-full p-10 shadow-2xl text-center">
-            <div class="w-16 h-16 bg-gray-50 text-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl border border-gray-100">
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Akses Admin</h3>
-            <p class="text-sm font-medium text-gray-500 mb-8">Masukkan PIN untuk mengelola data.</p>
+    <div id="admin-login-modal" class="fixed inset-0 bg-paper-dark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-paper-card hairline-box max-w-sm w-full p-8 shadow-2xl text-center">
+            <p class="font-mono text-[11px] uppercase tracking-widest text-servant-accent mb-2">OTORISASI PENGURUS</p>
+            <h3 class="font-serif text-3xl text-ink mb-2">Panel Admin</h3>
+            <p class="text-xs text-ink-muted mb-6">Masukkan PIN pengurus untuk memperbarui jadwal ibadah atau agenda event.</p>
             <form onsubmit="verifyAdminPin(event)">
-                <input type="password" id="admin-pin-input" placeholder="PIN..." class="w-full bg-gray-50 px-5 py-4 rounded-2xl border-none text-center text-xl tracking-[0.5em] focus:ring-2 focus:ring-servant-primary/20 outline-none mb-4 font-bold" required>
-                <p id="pin-error" class="text-red-500 font-bold text-xs mb-4 hidden">PIN Salah!</p>
+                <input type="password" id="admin-pin-input" placeholder="•••••" class="w-full bg-paper px-4 py-3.5 hairline-box text-center text-xl tracking-[0.4em] outline-none mb-3 font-mono" required>
+                <p id="pin-error" class="text-red-600 font-mono text-xs mb-3 hidden">PIN yang dimasukkan salah.</p>
                 <div class="flex gap-3 mt-4">
-                    <button type="button" onclick="closeLoginModal()" class="flex-1 py-3.5 rounded-full bg-white border border-gray-200 text-gray-600 font-bold hover:bg-gray-50 transition-colors">Batal</button>
-                    <button type="submit" class="flex-1 py-3.5 rounded-full bg-gray-900 text-white font-bold hover:bg-servant-primary transition-colors shadow-md">Masuk</button>
+                    <button type="button" onclick="closeLoginModal()" class="flex-1 py-3 hairline-box bg-paper text-ink text-xs font-mono uppercase hover:bg-paper-warm transition-colors">Batal</button>
+                    <button type="submit" class="flex-1 py-3 bg-servant-primary text-paper text-xs font-mono uppercase hover:bg-servant-dark transition-colors">Masuk</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- ================= MODAL PANEL ADMIN (KELOLA JADWAL & EVENT) ================= -->
-    <div id="admin-panel-modal" class="fixed inset-0 bg-gray-900/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-[2rem] max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto">
+    <div id="admin-panel-modal" class="fixed inset-0 bg-paper-dark/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-paper-card hairline-box max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto">
             
-            <div class="bg-gray-900 text-white px-8 py-5 flex justify-between items-center">
+            <div class="bg-paper-dark text-paper px-8 py-5 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-sliders text-servant-accent"></i>
-                    <h3 class="font-extrabold tracking-wide">Workspace Admin</h3>
+                    <h3 class="font-mono text-xs uppercase tracking-widest">Ruang Kelola Pengurus Permata GPT</h3>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button onclick="logoutAdmin()" class="text-gray-400 hover:text-white text-sm font-bold transition-colors">Keluar</button>
-                    <button onclick="closeAdminModal()" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors">&times;</button>
+                    <button onclick="logoutAdmin()" class="text-paper/60 hover:text-paper text-xs font-mono uppercase transition-colors">Keluar Mode Admin</button>
+                    <button onclick="closeAdminModal()" class="w-8 h-8 bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">&times;</button>
                 </div>
             </div>
 
-            <div class="flex px-8 pt-4 border-b border-gray-100 gap-8">
-                <button id="tab-btn-jadwal" onclick="switchAdminTab('jadwal')" class="pb-4 font-extrabold text-sm border-b-2 border-servant-primary text-servant-primary">Jadwal Ibadah</button>
-                <button id="tab-btn-event" onclick="switchAdminTab('event')" class="pb-4 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-800">Event Mendatang</button>
+            <div class="flex px-8 pt-4 hairline-b gap-8 bg-paper">
+                <button id="tab-btn-jadwal" onclick="switchAdminTab('jadwal')" class="pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-servant-primary text-servant-primary font-bold">Jadwal Ibadah</button>
+                <button id="tab-btn-event" onclick="switchAdminTab('event')" class="pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-transparent text-ink-muted hover:text-ink">Agenda Event</button>
             </div>
 
             <!-- TAB 1: JADWAL -->
-            <div id="admin-tab-jadwal" class="p-8 overflow-y-auto flex-1 space-y-8 bg-gray-50/50">
-                <form id="form-jadwal" onsubmit="saveScheduleItem(event)" class="bg-white p-6 rounded-[1.5rem] border border-gray-100 shadow-sm space-y-5">
-                    <h4 id="form-jadwal-title" class="font-extrabold text-gray-900 text-sm uppercase tracking-wider">Tambah Jadwal</h4>
+            <div id="admin-tab-jadwal" class="p-8 overflow-y-auto flex-1 space-y-8 bg-paper">
+                <form id="form-jadwal" onsubmit="saveScheduleItem(event)" class="bg-paper-card p-6 hairline-box space-y-5">
+                    <h4 id="form-jadwal-title" class="font-mono text-xs uppercase tracking-wider text-servant-primary font-bold">Tambah / Edit Jadwal</h4>
                     <input type="hidden" id="sch-edit-index" value="-1">
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Label Minggu</label>
-                            <input type="text" id="inp-sch-label" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Label Minggu</label>
+                            <input type="text" id="inp-sch-label" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Hari & Tanggal</label>
-                            <input type="text" id="inp-sch-date" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Hari & Tanggal</label>
+                            <input type="text" id="inp-sch-date" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Waktu</label>
-                            <input type="text" id="inp-sch-time" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Tempat Ibadah</label>
-                            <input type="text" id="inp-sch-location" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Alamat Lengkap</label>
-                            <input type="text" id="inp-sch-address" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Waktu</label>
+                            <input type="text" id="inp-sch-time" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Pelayan Firman</label>
-                            <input type="text" id="inp-sch-speaker" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Tempat Ibadah</label>
+                            <input type="text" id="inp-sch-location" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Tema Warna</label>
-                            <select id="inp-sch-bg" class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Alamat Lengkap</label>
+                            <input type="text" id="inp-sch-address" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Pelayan Firman</label>
+                            <input type="text" id="inp-sch-speaker" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Nuansa Kartu</label>
+                            <select id="inp-sch-bg" class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
+                                <option value="bg-paper-card">Kertas Hangat (Default)</option>
+                                <option value="bg-paper-warm">Krem Klasik</option>
                                 <option value="bg-white">Putih Bersih</option>
-                                <option value="bg-purple-50">Ungu Soft</option>
-                                <option value="bg-amber-50">Amber / Emas</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-50 mt-4">
-                        <button type="button" id="btn-cancel-sch" onclick="resetScheduleForm()" class="hidden px-5 py-2.5 rounded-full font-bold text-sm text-gray-500 hover:bg-gray-100">Batal</button>
-                        <button type="submit" class="bg-gray-900 hover:bg-servant-primary text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-md transition-colors">Simpan</button>
+                    <div class="flex justify-end gap-3 pt-4 hairline-t">
+                        <button type="button" id="btn-cancel-sch" onclick="resetScheduleForm()" class="hidden px-4 py-2 hairline-box text-xs font-mono uppercase text-ink-muted">Batal</button>
+                        <button type="submit" class="bg-servant-primary hover:bg-servant-dark text-paper px-6 py-2.5 text-xs font-mono uppercase tracking-wider">Simpan Jadwal</button>
                     </div>
                 </form>
-                <div id="admin-schedule-list" class="space-y-4"></div>
+                <div id="admin-schedule-list" class="space-y-3"></div>
             </div>
 
             <!-- TAB 2: EVENT -->
-            <div id="admin-tab-event" class="hidden p-8 overflow-y-auto flex-1 space-y-8 bg-gray-50/50">
-                <form id="form-event" onsubmit="saveEventItem(event)" class="bg-white p-6 rounded-[1.5rem] border border-gray-100 shadow-sm space-y-5">
-                    <h4 id="form-event-title" class="font-extrabold text-gray-900 text-sm uppercase tracking-wider">Tambah Event</h4>
+            <div id="admin-tab-event" class="hidden p-8 overflow-y-auto flex-1 space-y-8 bg-paper">
+                <form id="form-event" onsubmit="saveEventItem(event)" class="bg-paper-card p-6 hairline-box space-y-5">
+                    <h4 id="form-event-title" class="font-mono text-xs uppercase tracking-wider text-servant-primary font-bold">Tambah / Edit Event</h4>
                     <input type="hidden" id="ev-edit-index" value="-1">
 
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Bulan</label>
-                            <input type="text" id="inp-ev-month" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Bulan</label>
+                            <input type="text" id="inp-ev-month" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Tanggal</label>
-                            <input type="text" id="inp-ev-day" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Tanggal</label>
+                            <input type="text" id="inp-ev-day" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Kategori</label>
-                            <input type="text" id="inp-ev-category" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Kategori</label>
+                            <input type="text" id="inp-ev-category" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Judul</label>
-                            <input type="text" id="inp-ev-title" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Judul Kegiatan</label>
+                            <input type="text" id="inp-ev-title" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Path Gambar</label>
-                            <input type="text" id="inp-ev-image" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Path / URL Foto</label>
+                            <input type="text" id="inp-ev-image" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Deskripsi</label>
-                        <textarea id="inp-ev-desc" rows="2" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none resize-none"></textarea>
+                        <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Deskripsi</label>
+                        <textarea id="inp-ev-desc" rows="2" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none resize-none"></textarea>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Teks Tombol</label>
-                            <input type="text" id="inp-ev-btn" required class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Teks Tombol</label>
+                            <input type="text" id="inp-ev-btn" required class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Link Pendaftaran</label>
-                            <input type="text" id="inp-ev-link" class="w-full bg-gray-50 px-4 py-3 rounded-xl border-none focus:ring-2 focus:ring-servant-primary/20 text-sm font-medium outline-none">
+                            <label class="block font-mono text-[11px] uppercase text-ink-muted mb-1">Tautan Pendaftaran</label>
+                            <input type="text" id="inp-ev-link" class="w-full bg-paper px-3.5 py-2.5 hairline-box text-sm outline-none">
                         </div>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-50 mt-4">
-                        <button type="button" id="btn-cancel-ev" onclick="resetEventForm()" class="hidden px-5 py-2.5 rounded-full font-bold text-sm text-gray-500 hover:bg-gray-100">Batal</button>
-                        <button type="submit" class="bg-gray-900 hover:bg-servant-primary text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-md transition-colors">Simpan</button>
+                    <div class="flex justify-end gap-3 pt-4 hairline-t">
+                        <button type="button" id="btn-cancel-ev" onclick="resetEventForm()" class="hidden px-4 py-2 hairline-box text-xs font-mono uppercase text-ink-muted">Batal</button>
+                        <button type="submit" class="bg-servant-primary hover:bg-servant-dark text-paper px-6 py-2.5 text-xs font-mono uppercase tracking-wider">Simpan Event</button>
                     </div>
                 </form>
-                <div id="admin-event-list" class="space-y-4"></div>
+                <div id="admin-event-list" class="space-y-3"></div>
             </div>
 
             <!-- Modal Footer Options -->
-            <div class="bg-white px-8 py-5 border-t border-gray-100 flex justify-between items-center">
-                <button onclick="resetToDefaultData()" class="text-xs text-red-500 font-bold hover:underline">Reset Data</button>
+            <div class="bg-paper-card px-8 py-4 hairline-t flex justify-between items-center">
+                <button onclick="resetToDefaultData()" class="text-xs text-red-600 font-mono uppercase hover:underline">Reset ke Data Awal</button>
                 <div class="flex gap-3">
-                    <button onclick="exportHardcodeData()" class="bg-gray-100 text-gray-700 hover:bg-gray-200 px-5 py-2 rounded-full text-xs font-bold transition-colors">Salin Data (Backup)</button>
-                    <button onclick="closeAdminModal()" class="bg-gray-900 text-white px-6 py-2 rounded-full text-sm font-bold">Selesai</button>
+                    <button onclick="exportHardcodeData()" class="hairline-box bg-paper px-4 py-2 text-xs font-mono uppercase hover:bg-paper-warm transition-colors">Salin Kode Data</button>
+                    <button onclick="closeAdminModal()" class="bg-ink text-paper px-5 py-2 text-xs font-mono uppercase">Tutup</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts (Core logic remains the same, updated rendering classes for Premium UI) -->
+    <!-- Custom Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 hidden bg-ink text-paper px-6 py-4 shadow-2xl border border-white/10 flex items-center gap-3 transition-all duration-300">
+        <i class="fa-solid fa-check text-servant-accent"></i>
+        <span id="toast-message" class="text-xs font-mono uppercase tracking-wider">Berhasil!</span>
+    </div>
+
+    <!-- Application Scripts -->
     <script>
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            const text = document.getElementById('toast-message');
+            if (!toast || !text) return;
+            text.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3200);
+        }
+
         const TOTAL_GALLERY_PHOTOS = 22;
-        const DEFAULT_EXT = '.jpg'; 
+        const DEFAULT_EXT = '.jpg';
+
+        // Curated warm photography fallbacks so the site never shows ugly grey "Foto X" boxes if local images aren't loaded yet
+        const CURATED_FALLBACKS = [
+            "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1529156069898-49953eb1b5ce?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=900&q=80"
+        ];
 
         function handleImageFallback(imgElement, photoNum) {
             const fallbacks = ['.jpeg', '.png', '.webp', '.JPG'];
@@ -818,8 +927,7 @@
                 imgElement.src = `images/Foto ${photoNum}${fallbacks[attempt]}`;
             } else {
                 imgElement.onerror = null;
-                // Elegant fallback placeholder for premium vibe
-                imgElement.src = `https://placehold.co/800x600/f3f4f6/9ca3af?text=Foto+${photoNum}`;
+                imgElement.src = CURATED_FALLBACKS[(photoNum - 1) % CURATED_FALLBACKS.length];
             }
         }
 
@@ -837,11 +945,15 @@
 
             let gridHTML = '';
             for (let i = 1; i <= TOTAL_GALLERY_PHOTOS; i++) {
+                const numLabel = String(i).padStart(2, '0');
                 gridHTML += `
-                    <div onclick="openLightbox(${i})" class="relative group rounded-[1.5rem] overflow-hidden aspect-square shadow-sm border border-gray-100 cursor-pointer bg-gray-50">
-                        <img id="grid-img-${i}" src="images/Foto ${i}${DEFAULT_EXT}" onerror="handleImageFallback(this, ${i})" alt="Foto ${i}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-5">
-                            <p class="text-white font-extrabold text-sm transform translate-y-2 group-hover:translate-y-0 transition-all">Memori #${i}</p>
+                    <div onclick="openLightbox(${i})" class="group bg-paper-card p-3 hairline-box cursor-pointer">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-paper-warm mb-2.5">
+                            <img id="grid-img-${i}" src="images/Foto ${i}${DEFAULT_EXT}" onerror="handleImageFallback(this, ${i})" alt="Foto ${i}" loading="lazy" class="w-full h-full object-cover editorial-img">
+                        </div>
+                        <div class="flex justify-between items-center font-mono text-[11px] text-ink-muted">
+                            <span>ARSIP #${numLabel}</span>
+                            <span class="group-hover:text-servant-primary transition-colors">PERBESAR ↗</span>
                         </div>
                     </div>
                 `;
@@ -854,17 +966,15 @@
         function openLightbox(index) {
             currentLightboxIndex = index;
             updateLightboxContent();
-            const modal = document.getElementById('lightbox-modal');
-            modal.classList.remove('hidden');
-            // Small delay to allow display:block before fading in
-            setTimeout(() => modal.classList.add('opacity-100'), 10);
+            document.getElementById('lightbox-modal').classList.remove('hidden');
         }
 
         function updateLightboxContent() {
             const gridImg = document.getElementById(`grid-img-${currentLightboxIndex}`);
             const lightboxImg = document.getElementById('lightbox-img');
             lightboxImg.src = gridImg ? gridImg.src : `images/Foto ${currentLightboxIndex}${DEFAULT_EXT}`;
-            document.getElementById('lightbox-caption').textContent = `Foto ${currentLightboxIndex} dari ${TOTAL_GALLERY_PHOTOS}`;
+            const numLabel = String(currentLightboxIndex).padStart(2, '0');
+            document.getElementById('lightbox-caption').textContent = `ARSIP DOKUMENTASI #${numLabel} / ${TOTAL_GALLERY_PHOTOS}`;
         }
 
         function changeLightboxImage(step, event) {
@@ -892,26 +1002,56 @@
         // SPA Navigation & Data State
         const ADMIN_PIN = "12345";
         const defaultScheduleData = [
-            { label: "Minggu Ini", date: "Minggu, 13 September 2026", location: "Sektor Pelayanan A", address: "Jl. Raya Abepura No. 15, Jayapura", speaker: "Pdt. Andreas Marbun", time: "17.00 WIT - Selesai", bgColor: "bg-white" },
-            { label: "Minggu Depan", date: "Minggu, 20 September 2026", location: "Gedung Gereja Pusat GPT", address: "Jl. Kelapa Dua Entrop, Jayapura", speaker: "Ev. Samuel Pratama", time: "17.00 WIT - Selesai", bgColor: "bg-white" }
+            { label: "Minggu Ini", date: "Minggu, 13 September 2026", location: "Sektor Pelayanan A (Rumah Kel. Bpk. John)", address: "Jl. Raya Abepura No. 15, Jayapura", speaker: "Pdt. Andreas Marbun", time: "17.00 WIT - Selesai", bgColor: "bg-paper-card" },
+            { label: "Minggu Depan", date: "Minggu, 20 September 2026", location: "Gedung Gereja Pusat GPT", address: "Jl. Kelapa Dua Entrop, Jayapura", speaker: "Ev. Samuel Pratama", time: "17.00 WIT - Selesai", bgColor: "bg-paper-warm" },
+            { label: "2 Minggu Lagi", date: "Minggu, 27 September 2026", location: "Sektor Pelayanan B (Rumah Bpk. Simon)", address: "Perumahan Kotaraja, Jayapura", speaker: "Pdm. Lidya Kusuma", time: "17.00 WIT - Selesai", bgColor: "bg-white" }
         ];
         const defaultEventData = [
-            { month: "Okt", day: "24", category: "Youth Camp", title: 'Retreat Pemuda 2026: "Ignite"', description: "Tiga hari kebersamaan untuk menyalakan kembali api pelayanan.", image: "images/Foto 2.jpg", buttonText: "Daftar", link: "#" },
-            { month: "Nov", day: "12", category: "Social", title: "Bakti Sosial Kasih", description: "Pelayanan kasih ke panti asuhan setempat.", image: "images/Foto 3.jpg", buttonText: "Ikut Serta", link: "#" }
+            { month: "Okt", day: "24", category: "Youth Camp", title: 'Retreat Pemuda 2026: "Ignite"', description: "Tiga hari kebersamaan untuk menyalakan kembali api pelayanan dan kasih persaudaraan di dalam Kristus.", image: "images/Foto 2.jpg", buttonText: "Informasi & Pendaftaran", link: "#" },
+            { month: "Nov", day: "12", category: "Aksi Kasih", title: "Bakti Sosial & Kunjungan Kasih", description: "Pelayanan kasih ke panti asuhan setempat. Mari berbagi berkat dan sukacita bersama saudara-saudara kita.", image: "images/Foto 3.jpg", buttonText: "Ikut Berpartisipasi", link: "#" }
         ];
 
-        // FIX: Mencegah bug data kosong akibat localStorage sebelumnya
-        let savedSchedules = JSON.parse(localStorage.getItem('permata_schedules'));
-        let scheduleData = (savedSchedules && savedSchedules.length > 0) ? savedSchedules : JSON.parse(JSON.stringify(defaultScheduleData));
+        function safeGetStorage(key) {
+            try {
+                const item = localStorage.getItem(key);
+                return item ? JSON.parse(item) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function safeSetStorage(key, val) {
+            try {
+                localStorage.setItem(key, JSON.stringify(val));
+            } catch (e) {}
+        }
+
+        function safeGetSession(key) {
+            try {
+                return sessionStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function safeSetSession(key, val) {
+            try {
+                if (val === null) sessionStorage.removeItem(key);
+                else sessionStorage.setItem(key, val);
+            } catch (e) {}
+        }
+
+        let savedSchedules = safeGetStorage('permata_schedules');
+        let scheduleData = (Array.isArray(savedSchedules) && savedSchedules.length > 0) ? savedSchedules : JSON.parse(JSON.stringify(defaultScheduleData));
         
-        let savedEvents = JSON.parse(localStorage.getItem('permata_events'));
-        let eventData = (savedEvents && savedEvents.length > 0) ? savedEvents : JSON.parse(JSON.stringify(defaultEventData));
+        let savedEvents = safeGetStorage('permata_events');
+        let eventData = (Array.isArray(savedEvents) && savedEvents.length > 0) ? savedEvents : JSON.parse(JSON.stringify(defaultEventData));
         
-        let isAdminLoggedIn = sessionStorage.getItem('permata_admin') === 'true';
+        let isAdminLoggedIn = safeGetSession('permata_admin') === 'true';
 
         function saveToStorage() {
-            localStorage.setItem('permata_schedules', JSON.stringify(scheduleData));
-            localStorage.setItem('permata_events', JSON.stringify(eventData));
+            safeSetStorage('permata_schedules', scheduleData);
+            safeSetStorage('permata_events', eventData);
         }
 
         function navigate(pageId) {
@@ -919,15 +1059,15 @@
             document.getElementById(pageId).classList.add('active');
             
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-servant-primary', 'bg-white', 'shadow-sm');
-                link.classList.add('text-gray-600');
+                link.classList.remove('text-ink', 'border-servant-primary', 'font-semibold');
+                link.classList.add('text-ink-muted', 'border-transparent');
             });
             
             const clickedLinks = document.querySelectorAll(`button[onclick="navigate('${pageId}')"]`);
             clickedLinks.forEach(link => {
                 if(link.classList.contains('nav-link')) {
-                    link.classList.remove('text-gray-600');
-                    link.classList.add('text-servant-primary', 'bg-white', 'shadow-sm');
+                    link.classList.remove('text-ink-muted', 'border-transparent');
+                    link.classList.add('text-ink', 'border-servant-primary', 'font-semibold');
                 }
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -945,12 +1085,11 @@
             mobileBtn.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
         }
 
-        // Render Data
+        // Render Schedule Data
         let currentScheduleIndex = 0;
         let currentRotation = 0;
 
         function renderCurrentSchedule() {
-            // FIX: Tampilan jika data benar-benar kosong
             if (scheduleData.length === 0) {
                 document.getElementById('sch-label').textContent = "Kosong";
                 document.getElementById('sch-date').textContent = "Belum ada jadwal";
@@ -972,7 +1111,7 @@
             document.getElementById('sch-time').textContent = data.time || "17.00 WIT - Selesai";
 
             const card = document.getElementById('schedule-card');
-            card.className = `${data.bgColor || 'bg-white'} rounded-[2.5rem] p-10 shadow-soft border border-white transition-all duration-500 relative overflow-hidden group`;
+            card.className = `${data.bgColor || 'bg-paper-card'} p-8 sm:p-12 hairline-box transition-all duration-300`;
         }
 
         function rotateSchedule() {
@@ -983,41 +1122,44 @@
             currentScheduleIndex = (currentScheduleIndex + 1) % scheduleData.length;
             const card = document.getElementById('schedule-card');
             card.style.opacity = 0;
-            card.style.transform = "scale(0.95)";
+            card.style.transform = "translateY(6px)";
 
             setTimeout(() => {
                 renderCurrentSchedule();
                 card.style.opacity = 1;
-                card.style.transform = "scale(1)";
-            }, 300);
+                card.style.transform = "translateY(0)";
+            }, 260);
         }
 
         function renderEvents() {
             const container = document.getElementById('event-grid-container');
             if (eventData.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center font-bold text-gray-400">Belum ada event.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center font-mono text-sm text-ink-muted py-12 hairline-box">Belum ada agenda kegiatan mendatang.</div>`;
                 return;
             }
             container.innerHTML = eventData.map((ev, idx) => `
-                <div class="bg-white rounded-[2rem] p-4 shadow-soft border border-gray-50 flex flex-col sm:flex-row group hover:shadow-xl transition-shadow">
-                    <div class="sm:w-1/3 h-48 sm:h-auto rounded-[1.5rem] overflow-hidden relative">
-                        <img src="${ev.image}" onerror="this.src='https://placehold.co/600x400/9F7AEA/ffffff?text=Event'" alt="${ev.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur text-gray-900 rounded-xl p-2 text-center shadow-sm min-w-[50px]">
-                            <p class="text-[10px] font-extrabold uppercase">${ev.month}</p>
-                            <p class="text-xl font-black leading-none">${ev.day}</p>
+                <article class="bg-paper-card hairline-box flex flex-col group">
+                    <div class="relative aspect-[16/10] overflow-hidden bg-paper-warm hairline-b">
+                        <img src="${ev.image}" onerror="handleImageFallback(this, ${(idx % 5) + 2})" alt="${ev.title}" class="w-full h-full object-cover editorial-img">
+                        <div class="absolute top-4 left-4 bg-paper text-ink hairline-box px-3.5 py-2 text-center">
+                            <p class="font-mono text-[10px] uppercase tracking-widest text-servant-accent">${ev.month}</p>
+                            <p class="font-serif text-3xl leading-none">${ev.day}</p>
                         </div>
                     </div>
-                    <div class="p-6 sm:w-2/3 flex flex-col justify-between">
+                    <div class="p-8 flex-1 flex flex-col justify-between">
                         <div>
-                            <span class="text-[10px] font-extrabold text-servant-accent uppercase tracking-widest mb-2 block">${ev.category}</span>
-                            <h3 class="text-2xl font-extrabold text-gray-900 mb-2 leading-tight">${ev.title}</h3>
-                            <p class="text-gray-500 text-sm mb-6 font-medium line-clamp-2">${ev.description}</p>
+                            <span class="font-mono text-[11px] text-servant-primary uppercase tracking-widest mb-2 block">${ev.category}</span>
+                            <h3 class="font-serif text-3xl sm:text-4xl text-ink mb-3 leading-tight">${ev.title}</h3>
+                            <p class="text-ink-muted text-sm mb-8 leading-relaxed">${ev.description}</p>
                         </div>
-                        <a href="${ev.link || '#'}" class="bg-gray-50 hover:bg-servant-primary hover:text-white text-gray-900 px-6 py-3 rounded-full font-bold text-sm transition-colors text-center sm:text-left flex items-center justify-center sm:justify-start gap-2 self-start w-full sm:w-auto">
-                            ${ev.buttonText || 'Detail'} <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                        <div class="pt-5 hairline-t flex justify-between items-center">
+                            <a href="${ev.link || '#'}" class="font-mono text-xs uppercase tracking-widest text-ink hover:text-servant-primary inline-flex items-center gap-2 transition-colors">
+                                ${ev.buttonText || 'Selengkapnya'} <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                            <span class="font-mono text-[11px] text-ink-light">AGENDA 0${idx + 1}</span>
+                        </div>
                     </div>
-                </div>
+                </article>
             `).join('');
         }
 
@@ -1051,13 +1193,14 @@
             e.preventDefault();
             if (document.getElementById('admin-pin-input').value === ADMIN_PIN) {
                 isAdminLoggedIn = true;
-                sessionStorage.setItem('permata_admin', 'true');
+                safeSetSession('permata_admin', 'true');
                 closeLoginModal(); updateAdminUI(); openAdminModal();
+                showToast('Mode Pengurus Aktif');
             } else {
                 document.getElementById('pin-error').classList.remove('hidden');
             }
         }
-        function logoutAdmin() { isAdminLoggedIn = false; sessionStorage.removeItem('permata_admin'); updateAdminUI(); closeAdminModal(); }
+        function logoutAdmin() { isAdminLoggedIn = false; safeSetSession('permata_admin', null); updateAdminUI(); closeAdminModal(); showToast('Keluar dari Mode Pengurus'); }
         function openAdminModal(tab='jadwal') { renderAdminLists(); switchAdminTab(tab); document.getElementById('admin-panel-modal').classList.remove('hidden'); }
         function closeAdminModal() { document.getElementById('admin-panel-modal').classList.add('hidden'); }
 
@@ -1068,82 +1211,155 @@
             const btnEvent = document.getElementById('tab-btn-event');
             if (tab === 'jadwal') {
                 tabJadwal.classList.remove('hidden'); tabEvent.classList.add('hidden');
-                btnJadwal.className = "pb-4 font-extrabold text-sm border-b-2 border-servant-primary text-servant-primary";
-                btnEvent.className = "pb-4 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-800";
+                btnJadwal.className = "pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-servant-primary text-servant-primary font-bold";
+                btnEvent.className = "pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-transparent text-ink-muted hover:text-ink";
             } else {
                 tabJadwal.classList.add('hidden'); tabEvent.classList.remove('hidden');
-                btnEvent.className = "pb-4 font-extrabold text-sm border-b-2 border-servant-primary text-servant-primary";
-                btnJadwal.className = "pb-4 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-800";
+                btnEvent.className = "pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-servant-primary text-servant-primary font-bold";
+                btnJadwal.className = "pb-3 font-mono text-xs uppercase tracking-wider border-b-2 border-transparent text-ink-muted hover:text-ink";
             }
         }
 
-        // Admin CRUD (Matches UI exactly as previously built)
         function renderAdminLists() {
             document.getElementById('admin-schedule-list').innerHTML = scheduleData.map((item, idx) => `
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                    <div><span class="text-xs font-bold px-2 py-1 bg-gray-100 rounded-md text-gray-600">${item.label}</span>
-                    <span class="font-extrabold ml-2 text-sm">${item.date}</span>
-                    <p class="text-xs text-gray-500 mt-1">${item.location}</p></div>
+                <div class="flex items-center justify-between p-4 bg-paper-card hairline-box">
+                    <div>
+                        <span class="font-mono text-[10px] uppercase px-2 py-0.5 bg-paper-warm text-ink">${item.label}</span>
+                        <span class="font-serif text-xl ml-2 text-ink">${item.date}</span>
+                        <p class="text-xs text-ink-muted mt-1">${item.location} — ${item.speaker}</p>
+                    </div>
                     <div class="flex gap-2">
-                        <button onclick="editScheduleItem(${idx})" class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 hover:bg-amber-100 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="deleteScheduleItem(${idx})" class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 hover:bg-red-100 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div></div>`).join('');
+                        <button onclick="editScheduleItem(${idx})" class="w-8 h-8 hairline-box bg-paper text-ink hover:bg-paper-warm flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteScheduleItem(${idx})" class="w-8 h-8 hairline-box bg-paper text-red-600 hover:bg-red-50 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>`).join('');
+
             document.getElementById('admin-event-list').innerHTML = eventData.map((ev, idx) => `
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                    <div><h5 class="font-extrabold text-sm">${ev.title}</h5>
-                    <p class="text-xs font-bold text-servant-primary uppercase">${ev.month} ${ev.day} — ${ev.category}</p></div>
+                <div class="flex items-center justify-between p-4 bg-paper-card hairline-box">
+                    <div>
+                        <h5 class="font-serif text-xl text-ink">${ev.title}</h5>
+                        <p class="font-mono text-[11px] text-servant-accent uppercase">${ev.day} ${ev.month} — ${ev.category}</p>
+                    </div>
                     <div class="flex gap-2">
-                        <button onclick="editEventItem(${idx})" class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 hover:bg-amber-100 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="deleteEventItem(${idx})" class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 hover:bg-red-100 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div></div>`).join('');
+                        <button onclick="editEventItem(${idx})" class="w-8 h-8 hairline-box bg-paper text-ink hover:bg-paper-warm flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteEventItem(${idx})" class="w-8 h-8 hairline-box bg-paper text-red-600 hover:bg-red-50 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>`).join('');
         }
 
-        // Binding saving functionality
         function saveScheduleItem(e) {
             e.preventDefault();
             const idx = parseInt(document.getElementById('sch-edit-index').value);
-            const newItem = { label: document.getElementById('inp-sch-label').value, date: document.getElementById('inp-sch-date').value, time: document.getElementById('inp-sch-time').value, location: document.getElementById('inp-sch-location').value, address: document.getElementById('inp-sch-address').value, speaker: document.getElementById('inp-sch-speaker').value, bgColor: document.getElementById('inp-sch-bg').value };
+            const newItem = {
+                label: document.getElementById('inp-sch-label').value,
+                date: document.getElementById('inp-sch-date').value,
+                time: document.getElementById('inp-sch-time').value,
+                location: document.getElementById('inp-sch-location').value,
+                address: document.getElementById('inp-sch-address').value,
+                speaker: document.getElementById('inp-sch-speaker').value,
+                bgColor: document.getElementById('inp-sch-bg').value
+            };
             idx >= 0 ? scheduleData[idx] = newItem : scheduleData.push(newItem);
             saveToStorage(); resetScheduleForm(); renderAdminLists(); renderCurrentSchedule();
+            showToast('Jadwal berhasil disimpan');
         }
+
         function editScheduleItem(idx) {
-            const item = scheduleData[idx]; document.getElementById('sch-edit-index').value = idx;
-            ['label', 'date', 'time', 'location', 'address', 'speaker', 'bg'].forEach(k => document.getElementById(`inp-sch-${k}`).value = item[k === 'bg' ? 'bgColor' : k] || '');
-            document.getElementById('form-jadwal-title').textContent = "Edit Jadwal"; document.getElementById('btn-cancel-sch').classList.remove('hidden');
+            const item = scheduleData[idx];
+            document.getElementById('sch-edit-index').value = idx;
+            ['label', 'date', 'time', 'location', 'address', 'speaker', 'bg'].forEach(k => {
+                document.getElementById(`inp-sch-${k}`).value = item[k === 'bg' ? 'bgColor' : k] || '';
+            });
+            document.getElementById('form-jadwal-title').textContent = "Edit Jadwal";
+            document.getElementById('btn-cancel-sch').classList.remove('hidden');
         }
-        function deleteScheduleItem(idx) { if (confirm('Hapus jadwal?')) { scheduleData.splice(idx, 1); saveToStorage(); renderAdminLists(); renderCurrentSchedule(); } }
-        function resetScheduleForm() { document.getElementById('form-jadwal').reset(); document.getElementById('sch-edit-index').value = -1; document.getElementById('form-jadwal-title').textContent = "Tambah Jadwal"; document.getElementById('btn-cancel-sch').classList.add('hidden'); }
+
+        function deleteScheduleItem(idx) {
+            scheduleData.splice(idx, 1);
+            saveToStorage(); renderAdminLists(); renderCurrentSchedule();
+            showToast('Jadwal dihapus');
+        }
+
+        function resetScheduleForm() {
+            document.getElementById('form-jadwal').reset();
+            document.getElementById('sch-edit-index').value = -1;
+            document.getElementById('form-jadwal-title').textContent = "Tambah / Edit Jadwal";
+            document.getElementById('btn-cancel-sch').classList.add('hidden');
+        }
 
         function saveEventItem(e) {
             e.preventDefault();
             const idx = parseInt(document.getElementById('ev-edit-index').value);
-            const newItem = { month: document.getElementById('inp-ev-month').value, day: document.getElementById('inp-ev-day').value, category: document.getElementById('inp-ev-category').value, title: document.getElementById('inp-ev-title').value, image: document.getElementById('inp-ev-image').value, description: document.getElementById('inp-ev-desc').value, buttonText: document.getElementById('inp-ev-btn').value, link: document.getElementById('inp-ev-link').value };
+            const newItem = {
+                month: document.getElementById('inp-ev-month').value,
+                day: document.getElementById('inp-ev-day').value,
+                category: document.getElementById('inp-ev-category').value,
+                title: document.getElementById('inp-ev-title').value,
+                image: document.getElementById('inp-ev-image').value,
+                description: document.getElementById('inp-ev-desc').value,
+                buttonText: document.getElementById('inp-ev-btn').value,
+                link: document.getElementById('inp-ev-link').value
+            };
             idx >= 0 ? eventData[idx] = newItem : eventData.push(newItem);
             saveToStorage(); resetEventForm(); renderAdminLists(); renderEvents();
+            showToast('Event berhasil disimpan');
         }
+
         function editEventItem(idx) {
-            const ev = eventData[idx]; document.getElementById('ev-edit-index').value = idx;
-            ['month', 'day', 'category', 'title', 'image', 'desc', 'btn', 'link'].forEach(k => document.getElementById(`inp-ev-${k}`).value = ev[k==='desc'?'description':k==='btn'?'buttonText':k] || '');
-            document.getElementById('form-event-title').textContent = "Edit Event"; document.getElementById('btn-cancel-ev').classList.remove('hidden');
+            const ev = eventData[idx];
+            document.getElementById('ev-edit-index').value = idx;
+            ['month', 'day', 'category', 'title', 'image', 'desc', 'btn', 'link'].forEach(k => {
+                document.getElementById(`inp-ev-${k}`).value = ev[k==='desc'?'description':k==='btn'?'buttonText':k] || '';
+            });
+            document.getElementById('form-event-title').textContent = "Edit Event";
+            document.getElementById('btn-cancel-ev').classList.remove('hidden');
         }
-        function deleteEventItem(idx) { if (confirm('Hapus event?')) { eventData.splice(idx, 1); saveToStorage(); renderAdminLists(); renderEvents(); } }
-        function resetEventForm() { document.getElementById('form-event').reset(); document.getElementById('ev-edit-index').value = -1; document.getElementById('form-event-title').textContent = "Tambah Event"; document.getElementById('btn-cancel-ev').classList.add('hidden'); }
+
+        function deleteEventItem(idx) {
+            eventData.splice(idx, 1);
+            saveToStorage(); renderAdminLists(); renderEvents();
+            showToast('Event dihapus');
+        }
+
+        function resetEventForm() {
+            document.getElementById('form-event').reset();
+            document.getElementById('ev-edit-index').value = -1;
+            document.getElementById('form-event-title').textContent = "Tambah / Edit Event";
+            document.getElementById('btn-cancel-ev').classList.add('hidden');
+        }
 
         function resetToDefaultData() {
-            if (confirm('Kembalikan ke awal?')) {
-                localStorage.removeItem('permata_schedules'); localStorage.removeItem('permata_events');
-                scheduleData = JSON.parse(JSON.stringify(defaultScheduleData)); eventData = JSON.parse(JSON.stringify(defaultEventData));
-                renderAdminLists(); renderCurrentSchedule(); renderEvents();
-            }
+            try {
+                localStorage.removeItem('permata_schedules');
+                localStorage.removeItem('permata_events');
+            } catch (e) {}
+            scheduleData = JSON.parse(JSON.stringify(defaultScheduleData));
+            eventData = JSON.parse(JSON.stringify(defaultEventData));
+            renderAdminLists(); renderCurrentSchedule(); renderEvents();
+            showToast('Data dikembalikan ke awal');
         }
+
         function exportHardcodeData() {
-            navigator.clipboard.writeText(`const defaultScheduleData = ${JSON.stringify(scheduleData, null, 4)};\nconst defaultEventData = ${JSON.stringify(eventData, null, 4)};`)
-                .then(() => alert('Kode berhasil disalin!'));
+            const codeText = `const defaultScheduleData = ${JSON.stringify(scheduleData, null, 4)};\nconst defaultEventData = ${JSON.stringify(eventData, null, 4)};`;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = codeText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('Kode berhasil disalin ke Clipboard!');
         }
 
         // Init
-        document.querySelector('.nav-link').classList.add('text-servant-primary', 'bg-white', 'shadow-sm');
-        renderGallery(); renderCurrentSchedule(); renderEvents(); updateAdminUI();
+        const firstNav = document.querySelector('.nav-link');
+        if (firstNav) {
+            firstNav.classList.remove('text-ink-muted', 'border-transparent');
+            firstNav.classList.add('text-ink', 'border-servant-primary', 'font-semibold');
+        }
+        renderGallery();
+        renderCurrentSchedule();
+        renderEvents();
+        updateAdminUI();
     </script>
 </body>
 </html>
